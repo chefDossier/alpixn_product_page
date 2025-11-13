@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --app-noir: #00070E; 
+  --app-bleunuit: #002348;
+  --app-magenta: #D42190;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-hero-clair: var(--app-magenta);
+  --color-hero-sombre: var(--app-bleunuit);
+  --color-hero-noir: var(--app-noir);
+  
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components{
+  .heroSection{
+    background:
+      radial-gradient(ellipse at left center, var(--color-hero-noir) 0%, var(--color-hero-noir) 12%, transparent 36%),
+      radial-gradient(ellipse at right center, var(--color-hero-noir) 0%, var(--color-hero-noir) 12%, transparent 36%),
+      radial-gradient(circle at center top, var(--color-hero-clair) 0%, var(--color-hero-sombre) 50%, transparent 80%),
+      radial-gradient(circle at center bottom, var(--color-hero-sombre) 0%, var(--color-hero-clair) 60%, transparent 95%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
