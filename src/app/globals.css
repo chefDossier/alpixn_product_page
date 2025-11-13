@@ -47,4 +47,15 @@ body {
     align-items: center;
     justify-content: center;
   }
+
+  .offerSection{
+    /* fallback */
+    background-color: var(--color-hero-sombre);
+    /* dégradé : sombre → noir (large zone centrale) → sombre */
+    background: linear-gradient(90deg,
+      var(--color-hero-sombre) 0%,
+      var(--color-hero-noir) 20%,
+      var(--color-hero-noir) 80%,
+      var(--color-hero-sombre) 100%);
+  }
 }
