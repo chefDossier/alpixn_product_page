@@ -6,6 +6,7 @@
   --app-noir: #00070E; 
   --app-bleunuit: #002348;
   --app-magenta: #D42190;
+  --app-blue: #389EFF
 }
 
 @theme inline {
@@ -16,6 +17,7 @@
   --color-hero-clair: var(--app-magenta);
   --color-hero-sombre: var(--app-bleunuit);
   --color-hero-noir: var(--app-noir);
+  --color-app-blue: var(--app-blue);
   
 }
 
@@ -33,20 +35,53 @@ body {
 }
 
 @layer components{
-  .heroSection{
-    background:
-      radial-gradient(ellipse at left center, var(--color-hero-noir) 0%, var(--color-hero-noir) 12%, transparent 36%),
-      radial-gradient(ellipse at right center, var(--color-hero-noir) 0%, var(--color-hero-noir) 12%, transparent 36%),
-      radial-gradient(circle at center top, var(--color-hero-clair) 0%, var(--color-hero-sombre) 50%, transparent 80%),
-      radial-gradient(circle at center bottom, var(--color-hero-sombre) 0%, var(--color-hero-clair) 60%, transparent 95%);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-blend-mode: multiply;
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.heroSection{
+    position: relative;
+    overflow: hidden;
   }
+
+  .heroSection::before,
+  .heroSection::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* largeur X augmentée pour bien couvrir à travers les rotations */
+    width: 460vmax;
+    /* épaisseur de la barre (ajuster selon goût) */
+    height: 25vmax;
+    transform-origin: center;
+    pointer-events: none;
+    border-radius: 9999px;
+    mix-blend-mode: screen;
+    /* flou pour donner l'effet loupe */
+    filter: blur(64px);
+    -webkit-filter: blur(64px);
+    will-change: transform, filter;
+  }
+
+  /* barre claire -> posée "sous" (z-index plus bas) */
+  .heroSection::before {
+    background: var(--color-hero-clair);
+    opacity: 0.24;
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.03);
+    z-index: 1;
+  }
+
+  /* barre sombre -> malgré qu'elle soit définie en second, on la place visuellement au-dessus */
+  .heroSection::after {
+    background: var(--color-hero-sombre);
+    opacity: 0.34;
+    transform: translate(-50%, -50%) rotate(-45deg) scale(1.03);
+    z-index: 2;
+  }
+
+  /* s'assurer que le contenu reste bien au-dessus des pseudos-éléments */
+  .heroSection > * {
+    position: relative;
+    z-index: 10;
+  }
+  
 
   .offerSection{
     /* fallback */
@@ -58,4 +93,33 @@ body {
       var(--color-hero-noir) 80%,
       var(--color-hero-sombre) 100%);
   }
+
+  
+    .cardGradient {
+      background-color: transparent;
+      background-image:
+        /* base: wide dark center with blue edges */
+        linear-gradient(135deg,
+          rgba(56,158,255,0.06) 0%,
+          rgba(56,158,255,0.18) 12%,
+          rgba(56,158,255,0.38) 24%,
+          var(--color-hero-sombre) 30%,
+          var(--color-hero-noir) 40%,
+          var(--color-hero-noir) 60%,
+          var(--color-hero-sombre) 70%,
+          rgba(56,158,255,0.38) 78%,
+          rgba(56,158,255,0.18) 90%,
+          rgba(56,158,255,0.06) 100%),
+        /* overlaid subtle wavy bands to create variation */
+        repeating-linear-gradient(135deg,
+          rgba(56,158,255,0.08) 0px,
+          rgba(56,158,255,0.08) 8px,
+          rgba(0,0,0,0) 8px,
+          rgba(0,0,0,0) 28px);
+      background-repeat: no-repeat;
+      background-size: cover, 200% 200%;
+      background-position: center, -20% -20%;
+      background-blend-mode: normal, screen;
+    }
+  
 }

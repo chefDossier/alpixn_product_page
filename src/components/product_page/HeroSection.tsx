@@ -1,4 +1,5 @@
 import Header from "./Header";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
 
 const HeroSection = () => {
   return (
@@ -6,7 +7,7 @@ const HeroSection = () => {
       <Header />
       
       <section
-        className={` heroSection
+        className={`heroSection bg-hero-noir
           flex flex-col items-center justify-center text-center
           min-h-screen                   
           w-full
@@ -34,10 +35,11 @@ const HeroSection = () => {
         
         <button
           className={`
-            bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 shadow-md
+            flex gap-4 items-center bg-app-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 shadow-md
           `}
         >
           Book your demo
+          <ArrowRightIcon className="w-5 h-5" aria-hidden />
         </button>
       </section>
     </div>

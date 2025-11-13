@@ -39,7 +39,7 @@ const Header = () => {
         {/* 3. Bouton (Droite) */}
         <div className="flex items-center">
           <button
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 shadow-md"
+            className="bg-app-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 shadow-md"
           >
             Get Started
           </button>
